@@ -35,6 +35,6 @@ class BilleteraElectronica:
         return self.creditos.total - self.debitos.total
     
     def recargar(self, monto, fecha, id_rest):
-        pass
+        self.creditos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         
         
