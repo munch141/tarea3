@@ -40,6 +40,18 @@ class Test(unittest.TestCase):
         self.assertEquals(b.creditos.trans[len(b.creditos.trans)-1].id_rest, 1)
         self.assertEquals(b.creditos.total, 1000)
 
+    def testConsumir(self):
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(1000, datetime(2016, 5, 11, 12, 0), 1)
+        b.consumir(500, datetime(2016, 5, 11, 12, 1), 1, 0)
+        
+        self.assertEquals(len(b.debitos.trans), 1)
+        self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].monto, 500)
+        self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].fecha,
+                          datetime(2016, 5, 11, 12, 1))
+        self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].id_rest, 1)
+        self.assertEquals(b.debitos.total, 500)
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
