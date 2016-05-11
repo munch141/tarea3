@@ -133,7 +133,39 @@ class Test(unittest.TestCase):
         h.agregarTransaccion(Transaccion(sys.float_info.max,
                                           datetime(2016, 5, 11, 12, 0), 1))
         self.assertEquals(h.total, sys.float_info.max)
-            
+    
+    def testCalcularSaldoCredito0Debito0(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        self.assertEqual(b.saldo(), 0)
+    
+    def testCalcularSaldoCreditoInfDebito0(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1) 
+        self.assertEqual(b.saldo(), sys.float_info.max)
+    
+    def testCalcularSaldoCredito0DebitoInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1, 1234) 
+        self.assertEqual(b.saldo(), 0)
+    
+    def testCalcularSaldoCreditoInfDebitoInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1)
+        b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 1), 1, 1234) 
+        self.assertEqual(b.saldo(), 0)
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
