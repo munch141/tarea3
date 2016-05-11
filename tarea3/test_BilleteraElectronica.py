@@ -22,14 +22,23 @@ class Test(unittest.TestCase):
         self.assertEquals(h.total, 1000)
         
     def testCalcularSaldo(self):
-        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, [1,2,3,4])
-        b.credito.agregarTransaccion(Transaccion(
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.creditos.agregarTransaccion(Transaccion(
                                         1000,datetime(2016, 5, 11, 12, 0), 1))
-        b.debito.agregarTransaccion(Transaccion(
+        b.debitos.agregarTransaccion(Transaccion(
                                         500, datetime(2016, 5, 11, 12, 30), 1))
         self.assertEqual(b.saldo(), 500)
         
-
+    def testRecargar(self):
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(1000, datetime(2016, 5, 11, 12, 0), 1)
+        
+        self.assertEquals(len(b.creditos.trans), 1)
+        self.assertEquals(b.creditos.trans[len(b.creditos.trans)-1].monto, 1000)
+        self.assertEquals(b.creditos.trans[len(b.creditos.trans)-1].fecha,
+                          datetime(2016, 5, 11, 12, 0))
+        self.assertEquals(b.creditos.trans[len(b.creditos.trans)-1].id_rest, 1)
+        self.assertEquals(b.creditos.total, 1000)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

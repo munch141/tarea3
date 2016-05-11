@@ -9,7 +9,6 @@ class Transaccion:
         self.fecha = fecha
         self.id_rest = id_rest
 
-        
 class Historial:
     def __init__(self):
         self.trans = list()
@@ -29,10 +28,13 @@ class BilleteraElectronica:
         self.nombres = nombres
         self.apellidos = apellidos
         self.ci = ci
-        self.credito = Historial()
-        self.debito = Historial()
+        self.creditos = Historial()
+        self.debitos = Historial()
         
     def saldo(self):
-        return self.credito.total - self.debito.total
+        return self.creditos.total - self.debitos.total
+    
+    def recargar(self, monto, fecha, id_rest):
+        pass
         
         
