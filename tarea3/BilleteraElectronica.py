@@ -28,6 +28,7 @@ class BilleteraElectronica:
         self.nombres = nombres
         self.apellidos = apellidos
         self.ci = ci
+        self.pin = pin
         self.creditos = Historial()
         self.debitos = Historial()
         
@@ -38,6 +39,9 @@ class BilleteraElectronica:
         self.creditos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         
     def consumir(self, monto, fecha, id_rest, pin):
-        self.debitos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
+        if pin == self.pin:
+            self.debitos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
+        elif pin != self.pin:
+            print("No realizó la transacción, PIN incorrecto.")
         
         
