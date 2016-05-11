@@ -33,6 +33,6 @@ class BilleteraElectronica:
         self.debito = Historial()
         
     def saldo(self):
-        pass
+        return self.credito.total - self.debito.total
         
         
