@@ -24,9 +24,15 @@ class BilleteraElectronica:
     classdocs
     '''
 
-    def __init__(self, params):
-        '''
-        Constructor
-        '''
+    def __init__(self, id, nombres, apellidos, ci, pin):
+        self.id = id
+        self.nombres = nombres
+        self.apellidos = apellidos
+        self.ci = ci
+        self.credito = Historial()
+        self.debito = Historial()
+        
+    def saldo(self):
         pass
+        
         
