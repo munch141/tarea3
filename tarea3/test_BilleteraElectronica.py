@@ -15,11 +15,11 @@ class Test(unittest.TestCase):
         h = Historial()
         h.agregarTransaccion(t)
         
-        self.assertEquals(len(h.transacciones), 1)
-        self.assertEquals(h.transacciones[len(h.transacciones)-1].monto, 1000)
-        self.assertEquals(h.transacciones[len(h.transacciones)-1].fecha,
+        self.assertEquals(len(h.trans), 1)
+        self.assertEquals(h.trans[len(h.trans)-1].monto, 1000)
+        self.assertEquals(h.trans[len(h.trans)-1].fecha,
                           datetime(2016, 5, 11, 12, 0))
-        self.assertEquals(h.transacciones[len(h.transacciones)-1].id_rest, 1)
+        self.assertEquals(h.trans[len(h.trans)-1].id_rest, 1)
         self.assertEquals(h.total, 1000)
 
 

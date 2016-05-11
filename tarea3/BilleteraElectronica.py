@@ -5,14 +5,19 @@ Created on May 11, 2016
 '''
 class Transaccion:
     def __init__(self, monto, fecha, id_rest):
-        pass
+        self.monto = monto
+        self.fecha = fecha
+        self.id_rest = id_rest
+
         
 class Historial:
     def __init__(self):
-        pass
+        self.trans = list()
+        self.total = 0
         
     def agregarTransaccion(self, t):
-        pass
+        self.trans.append(t)
+        self.total += t.monto
 
 class BilleteraElectronica:
     '''
