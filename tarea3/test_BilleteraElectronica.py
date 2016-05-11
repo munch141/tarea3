@@ -69,12 +69,12 @@ class Test(unittest.TestCase):
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
         b.recargar(1000, datetime(2016, 5, 11, 12, 0), 1)
         b.consumir(500, datetime(2016, 5, 11, 12, 1), 1, 1234)
-        b.consumir(2000, datetime(2016, 5, 11, 12, 2), 1, 1234)
+        b.consumir(2000, datetime(2016, 5, 11, 12, 2), 2, 1234)
         
         self.assertEquals(len(b.debitos.trans), 1)
         self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].monto, 500)
         self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].fecha,
-                          datetime(2016, 5, 11, 12, 2))
+                          datetime(2016, 5, 11, 12, 1))
         self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].id_rest, 1)
         self.assertEquals(b.debitos.total, 500)
 

@@ -39,9 +39,12 @@ class BilleteraElectronica:
         self.creditos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         
     def consumir(self, monto, fecha, id_rest, pin):
-        if pin == self.pin:
+        if pin == self.pin and monto <= self.saldo():
             self.debitos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         elif pin != self.pin:
             print("No realizó la transacción, PIN incorrecto.")
+        elif self.saldo() < monto:
+            print("No realizó la transacción, saldo insuficiente.")
+            
         
         
