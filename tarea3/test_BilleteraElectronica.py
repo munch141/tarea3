@@ -52,6 +52,7 @@ class Test(unittest.TestCase):
         self.assertEquals(b.debitos.trans[len(b.debitos.trans)-1].id_rest, 1)
         self.assertEquals(b.debitos.total, 500)
 
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

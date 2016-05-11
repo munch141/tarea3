@@ -38,6 +38,6 @@ class BilleteraElectronica:
         self.creditos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         
     def consumir(self, monto, fecha, id_rest, pin):
-        pass
+        self.debitos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
         
         
