@@ -166,6 +166,56 @@ class Test(unittest.TestCase):
         b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 1), 1, 1234) 
         self.assertEqual(b.saldo(), 0)
         
+    def testRecargarMonto0Total0(self):    
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(0, datetime(2016, 5, 11, 12, 0), 1)
+        self.assertEqual(b.creditos.total, 0)
+    
+    def testRecargarMontoInfTotal0(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1)
+        self.assertEqual(b.creditos.total, sys.float_info.max)
+    
+    def testRecargarMonto0TotalInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.creditos.total = sys.float_info.max
+        b.recargar(0, datetime(2016, 5, 11, 12, 0), 1)
+        self.assertEqual(b.creditos.total, sys.float_info.max)   
+    
+    def testRecargarMontoInfTotalInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.creditos.total = sys.float_info.max
+        b.recargar(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1)
+        self.assertEqual(b.creditos.total, sys.float_info.max)   
+   
+    def testConsumirMonto0Total0(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(0, datetime(2016, 5, 11, 12, 0), 1, 1234)
+        self.assertEqual(b.debitos.total, 0)  
+    
+    def testConsumirMontoInfTotal0(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1, 1234)
+        self.assertEqual(b.debitos.total, sys.float_info.max)
+           
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
