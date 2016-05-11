@@ -1,7 +1,9 @@
 '''
 Created on May 11, 2016
 
-@author: ricardo
+Hecho por:
+    Ricardo Münch. Carnet: 11-10684.
+    Raquel Prado. Carnet: 11-10801.
 '''
 class Transaccion:
     def __init__(self, monto, fecha, id_rest):
@@ -19,10 +21,6 @@ class Historial:
         self.total += t.monto
 
 class BilleteraElectronica:
-    '''
-    classdocs
-    '''
-
     def __init__(self, id, nombres, apellidos, ci, pin):
         self.id = id
         self.nombres = nombres
