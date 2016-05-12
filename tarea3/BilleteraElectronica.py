@@ -6,11 +6,12 @@ Hecho por:
     Raquel Prado. Carnet: 11-10801.
 '''
 import sys
+from datetime import datetime
 
 class Transaccion:
-    def __init__(self, monto, fecha, id_rest):
+    def __init__(self, monto, id_rest):
         self.monto = monto
-        self.fecha = fecha
+        self.fecha = datetime.now()
         self.id_rest = id_rest
 
 class Historial:
@@ -32,8 +33,8 @@ class Historial:
             self.total += t.monto
 
 class BilleteraElectronica:
-    def __init__(self, id, nombres, apellidos, ci, pin):
-        self.id = id
+    def __init__(self, ident, nombres, apellidos, ci, pin):
+        self.id = ident
         self.nombres = nombres
         self.apellidos = apellidos
         self.ci = ci
@@ -44,12 +45,12 @@ class BilleteraElectronica:
     def saldo(self):
         return self.creditos.total - self.debitos.total
     
-    def recargar(self, monto, fecha, id_rest):
-        self.creditos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
+    def recargar(self, monto, id_rest):
+        self.creditos.agregarTransaccion(Transaccion(monto, id_rest))
         
-    def consumir(self, monto, fecha, id_rest, pin):
+    def consumir(self, monto, id_rest, pin):
         if pin == self.pin and monto <= self.saldo():
-            self.debitos.agregarTransaccion(Transaccion(monto, fecha, id_rest))
+            self.debitos.agregarTransaccion(Transaccion(monto, id_rest))
         elif pin != self.pin:
             print("No se realizó la transacción, PIN incorrecto.")
         elif self.saldo() < monto:
