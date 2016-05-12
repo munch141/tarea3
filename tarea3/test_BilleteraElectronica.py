@@ -353,6 +353,22 @@ class Test(unittest.TestCase):
         b.consumir("sdsd", 1,1234)
         self.assertEqual(b.creditos.total, 0) 
     
+    def testConsumirPINTipoIncorrecto(self):
+        '''
+        Caso Malicioso
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(100, 1,"sdsd")
+        self.assertEqual(b.creditos.total, 0)
+        
+    def testAgregarTransaccionMontoTipoIncorrecto(self):
+        '''
+        Caso Malicioso
+        '''
+        h = Historial()
+        h.agregarTransaccion(Transaccion("Raquel", 1))
+        self.assertEqual(h.total, 0)
+        
               
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

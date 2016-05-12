@@ -21,17 +21,20 @@ class Historial:
         self.total = 0
         
     def agregarTransaccion(self, t):
-        if self.total < 0:
-            self.total = 0
-
-        if (t.monto == sys.float_info.max and 0 < self.total) or \
-           (self.total == sys.float_info.max and 0 < t.monto):
-            print("No se realizó la transacción. Límite del registo excedido.")
-        elif t.monto < 0:
-            print("No se realizó la transacción. Monto negativo.")
+        if not isinstance(t.monto, float) and not isinstance(t.monto, int):
+            print("Error el monto debe ser un número.")
         else:
-            self.trans.append(t)
-            self.total += t.monto
+            if self.total < 0:
+                self.total = 0
+    
+            if (t.monto == sys.float_info.max and 0 < self.total) or \
+               (self.total == sys.float_info.max and 0 < t.monto):
+                print("No se realizó la transacción. Límite del registo excedido.")
+            elif t.monto < 0:
+                print("No se realizó la transacción. Monto negativo.")
+            else:
+                self.trans.append(t)
+                self.total += t.monto
 
 class BilleteraElectronica:
     def __init__(self, ident, nombres, apellidos, ci, pin):
