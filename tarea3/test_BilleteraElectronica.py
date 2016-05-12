@@ -253,6 +253,9 @@ class Test(unittest.TestCase):
         self.assertEqual(h.total, sys.float_info.max)
         
     def testAgregarTransaccionSumaMayorQueMax1(self):
+        '''
+        Caso frontera
+        '''
         h = Historial()
         h.total = sys.float_info.min
         h.agregarTransaccion(Transaccion(sys.float_info.max,
@@ -260,11 +263,31 @@ class Test(unittest.TestCase):
         self.assertEqual(h.total, sys.float_info.min)
         
     def testAgregarTransaccionSumaMayorQueMax2(self):
+        '''
+        Caso frontera
+        '''
         h = Historial()
         h.total = sys.float_info.max
         h.agregarTransaccion(Transaccion(sys.float_info.min,
                                          datetime(2016, 5, 11, 12, 0), 1))
         self.assertEqual(h.total, sys.float_info.max)
+        
+    def testAgregarTransaccionSuma0(self):
+        '''
+        Caso frontera
+        '''
+        h = Historial()
+        h.agregarTransaccion(Transaccion(0, datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, 0)
+        
+    def testAgregarTransaccionSumaMenorQue0A(self):
+        '''
+        Caso frontera
+        '''
+        h = Historial()
+        h.agregarTransaccion(Transaccion(-sys.float_info.min,
+                                         datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, 0)
         
            
 if __name__ == "__main__":
