@@ -298,6 +298,23 @@ class Test(unittest.TestCase):
         h.agregarTransaccion(Transaccion(100, datetime(2016, 5, 11, 12, 0), 1))
         self.assertEqual(h.total, 100)
         
+    def testSaldo0(self):
+        '''
+        Caso frontera
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.creditos.total = 100
+        b.debitos.total = 100
+        self.assertEqual(b.saldo(), 0)
+        
+    def testSaldoMenorQue0(self):
+        '''
+        Caso frontera
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.creditos.total = 100
+        b.debitos.total = 100 + sys.float_info.min
+        self.assertEqual(b.saldo(), 100)
            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
