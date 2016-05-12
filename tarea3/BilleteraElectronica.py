@@ -19,11 +19,11 @@ class Historial:
         self.total = 0
         
     def agregarTransaccion(self, t):
-        self.trans.append(t)
         if (t.monto == sys.float_info.max and 0 < self.total) or \
            (self.total == sys.float_info.max and 0 < t.monto):
             print("No se realizó la transacción. Límite del registo excedido.")
         else:
+            self.trans.append(t)
             self.total += t.monto
 
 class BilleteraElectronica:
