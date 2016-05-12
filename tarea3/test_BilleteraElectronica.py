@@ -224,6 +224,48 @@ class Test(unittest.TestCase):
         b.debitos.total = sys.float_info.max
         b.consumir(0, datetime(2016, 5, 11, 12, 0), 1, 1234)
         self.assertEqual(b.debitos.total, sys.float_info.max)
+        
+    def testConsumirMontoInfTotalInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.debitos.total = sys.float_info.max
+        b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1, 1234)
+        self.assertEqual(b.debitos.total, sys.float_info.max)
+        
+    def testAgregarTransaccionSumaMax1(self):
+        '''
+        Caso frontera
+        '''
+        h = Historial()
+        h.agregarTransaccion(Transaccion(sys.float_info.max,
+                                         datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, sys.float_info.max)
+        
+    def testAgregarTransaccionSumaMax2(self):
+        '''
+        Caso frontera
+        '''
+        h = Historial()
+        h.total = sys.float_info.max
+        h.agregarTransaccion(Transaccion(0, datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, sys.float_info.max)
+        
+    def testAgregarTransaccionSumaMayorQueMax1(self):
+        h = Historial()
+        h.total = sys.float_info.min
+        h.agregarTransaccion(Transaccion(sys.float_info.max,
+                                         datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, sys.float_info.min)
+        
+    def testAgregarTransaccionSumaMayorQueMax2(self):
+        h = Historial()
+        h.total = sys.float_info.max
+        h.agregarTransaccion(Transaccion(sys.float_info.min,
+                                         datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, sys.float_info.max)
+        
            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
