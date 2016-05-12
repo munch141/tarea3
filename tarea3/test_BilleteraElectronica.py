@@ -336,6 +336,23 @@ class Test(unittest.TestCase):
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
         b.consumir(-sys.float_info.min, 1, 1234)
         self.assertEqual(b.debitos.total, 0)  
+    
+    def testRecargaTipoIncorrecto(self):
+        '''
+        Caso Malicioso
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.recargar(sdsd, 1)
+        self.assertEqual(b.creditos.total, 0) 
+    
+    def testConsumirMontoIncorrectoPINCorrecta(self):
+        '''
+        Caso Malicioso
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.cosumir(sdsd, 1,1234)
+        self.assertEqual(b.creditos.total, 0) 
+    
               
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
