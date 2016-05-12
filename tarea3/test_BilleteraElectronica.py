@@ -295,7 +295,7 @@ class Test(unittest.TestCase):
         '''
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
         b.debitos.total = sys.float_info.min
-        self.assertEqual(b.saldo(), 0)
+        self.assertEqual(b.saldo(), -1)
     
     def testRecarga0(self):
         '''
@@ -375,7 +375,7 @@ class Test(unittest.TestCase):
         '''
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
         b.debitos.total = -5
-        self.assertEqual(b.saldo(), 0)
+        self.assertEqual(b.saldo(), -1)
               
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

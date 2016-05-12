@@ -47,9 +47,9 @@ class BilleteraElectronica:
         self.debitos = Historial()
         
     def saldo(self):
-        if self.creditos.total - self.debitos.total < 0:
-            print("Error saldo menor que 0. Se colocara saldo en 0")
-            return 0
+        if (self.creditos.total - self.debitos.total < 0) or (self.debitos.total < 0):
+            print("Error saldo menor que 0. ")
+            return -1
         return self.creditos.total - self.debitos.total
     
     def recargar(self, monto, id_rest):
