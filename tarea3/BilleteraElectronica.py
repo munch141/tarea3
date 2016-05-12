@@ -68,7 +68,3 @@ class BilleteraElectronica:
                 print("No se realizó la transacci�n, PIN incorrecto.")
             elif self.saldo() < monto:
                 print("No se realizó la transacción, saldo insuficiente.")
-            
-          
-        
-        
