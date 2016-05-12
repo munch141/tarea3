@@ -22,6 +22,8 @@ class Historial:
         if (t.monto == sys.float_info.max and 0 < self.total) or \
            (self.total == sys.float_info.max and 0 < t.monto):
             print("No se realizó la transacción. Límite del registo excedido.")
+        elif t.monto < 0:
+            print("No se realizó la transacción. Monto negativo.")
         else:
             self.trans.append(t)
             self.total += t.monto

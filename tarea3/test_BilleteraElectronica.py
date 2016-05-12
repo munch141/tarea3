@@ -289,6 +289,14 @@ class Test(unittest.TestCase):
                                          datetime(2016, 5, 11, 12, 0), 1))
         self.assertEqual(h.total, 0)
         
+    def testAgregarTransaccionSumaMenorQue0B(self):
+        '''
+        Caso malicioso
+        '''
+        h = Historial()
+        h.total = -sys.float_info.min
+        self.assertEqual(h.total, 0)
+        
            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
