@@ -369,6 +369,13 @@ class Test(unittest.TestCase):
         h.agregarTransaccion(Transaccion("Raquel", 1))
         self.assertEqual(h.total, 0)
         
+    def testSaldoDebitoNegativo(self):
+        '''
+        Caso Malicioso
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.debitos.total = -5
+        self.assertEqual(b.saldo(), 0)
               
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
