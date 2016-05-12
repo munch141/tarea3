@@ -293,8 +293,11 @@ class Test(unittest.TestCase):
         Caso frontera
         '''
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
-        b.consumir(sys.float_info.min, 1, 1234)
+        b.debitos.total = -sys.float_info.min
         self.assertEqual(b.saldo(), 0)
+    
+    
+    
            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
