@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on May 11, 2016
 
@@ -312,9 +313,30 @@ class Test(unittest.TestCase):
         b.recargar(-sys.float_info.min, 1)
         self.assertEqual(b.creditos.total, 0)
         
-        
-        
-           
+    def testConsumirSaldoIgualMontoYPINCorrecto(self):
+        '''
+        Caso frontera
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(0, 1, 1234)
+        self.assertEqual(b.debitos.total, 0)    
+    
+    def testConsumirPINInorrecto(self):
+        '''
+        Caso frontera
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(100, 1, 1284)
+        self.assertEqual(b.debitos.total, 0) 
+            
+    def testConsumirSaldoMenorqueMontoPINCorrecto(self):
+        '''
+        Caso frontera
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.consumir(-sys.float_info.min, 1, 1234)
+        self.assertEqual(b.debitos.total, 0)  
+              
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

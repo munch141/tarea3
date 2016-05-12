@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 '''
 Created on May 11, 2016
 
 Hecho por:
     Ricardo Münch. Carnet: 11-10684.
     Raquel Prado. Carnet: 11-10801.
-'''
+'''       
 import sys
 from datetime import datetime
 
@@ -55,7 +56,7 @@ class BilleteraElectronica:
         if pin == self.pin and monto <= self.saldo():
             self.debitos.agregarTransaccion(Transaccion(monto, id_rest))
         elif pin != self.pin:
-            print("No se realizó la transacción, PIN incorrecto.")
+            print("No se realizó la transacci�n, PIN incorrecto.")
         elif self.saldo() < monto:
             print("No se realizó la transacción, saldo insuficiente.")
             
