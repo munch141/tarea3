@@ -342,7 +342,7 @@ class Test(unittest.TestCase):
         Caso Malicioso
         '''
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
-        b.recargar(sdsd, 1)
+        b.recargar("sdsd", 1)
         self.assertEqual(b.creditos.total, 0) 
     
     def testConsumirMontoIncorrectoPINCorrecta(self):
@@ -350,7 +350,7 @@ class Test(unittest.TestCase):
         Caso Malicioso
         '''
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
-        b.cosumir(sdsd, 1,1234)
+        b.consumir("sdsd", 1,1234)
         self.assertEqual(b.creditos.total, 0) 
     
               

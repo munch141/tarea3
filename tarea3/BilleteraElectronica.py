@@ -50,15 +50,22 @@ class BilleteraElectronica:
         return self.creditos.total - self.debitos.total
     
     def recargar(self, monto, id_rest):
-        self.creditos.agregarTransaccion(Transaccion(monto, id_rest))
+        if not isinstance(monto, float) and not isinstance(monto, int):
+            print("Error el monto debe ser un número.")
+        else:
+            self.creditos.agregarTransaccion(Transaccion(monto, id_rest))
         
     def consumir(self, monto, id_rest, pin):
-        if pin == self.pin and monto <= self.saldo():
-            self.debitos.agregarTransaccion(Transaccion(monto, id_rest))
-        elif pin != self.pin:
-            print("No se realizó la transacci�n, PIN incorrecto.")
-        elif self.saldo() < monto:
-            print("No se realizó la transacción, saldo insuficiente.")
+        if not isinstance(monto, float) and not isinstance(monto, int):
+            print("Error el monto debe ser un número.")
+        else:
+            if pin == self.pin and monto <= self.saldo():
+                self.debitos.agregarTransaccion(Transaccion(monto, id_rest))
+            elif pin != self.pin:
+                print("No se realizó la transacci�n, PIN incorrecto.")
+            elif self.saldo() < monto:
+                print("No se realizó la transacción, saldo insuficiente.")
             
+          
         
         
