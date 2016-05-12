@@ -295,7 +295,8 @@ class Test(unittest.TestCase):
         '''
         h = Historial()
         h.total = -sys.float_info.min
-        self.assertEqual(h.total, 0)
+        h.agregarTransaccion(Transaccion(100, datetime(2016, 5, 11, 12, 0), 1))
+        self.assertEqual(h.total, 100)
         
            
 if __name__ == "__main__":

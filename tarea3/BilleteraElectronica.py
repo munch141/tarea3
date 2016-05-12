@@ -19,6 +19,9 @@ class Historial:
         self.total = 0
         
     def agregarTransaccion(self, t):
+        if self.total < 0:
+            self.total = 0
+
         if (t.monto == sys.float_info.max and 0 < self.total) or \
            (self.total == sys.float_info.max and 0 < t.monto):
             print("No se realizó la transacción. Límite del registo excedido.")
