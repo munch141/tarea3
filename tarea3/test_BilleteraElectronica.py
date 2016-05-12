@@ -215,6 +215,15 @@ class Test(unittest.TestCase):
         b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
         b.consumir(sys.float_info.max, datetime(2016, 5, 11, 12, 0), 1, 1234)
         self.assertEqual(b.debitos.total, 0)
+        
+    def testConsumirMonto0TotalInf(self):
+        '''
+        Caso esquina
+        '''
+        b = BilleteraElectronica(1, "Ricardo", "Münch", 23073743, 1234)
+        b.debitos.total = sys.float_info.max
+        b.consumir(0, datetime(2016, 5, 11, 12, 0), 1, 1234)
+        self.assertEqual(b.debitos.total, sys.float_info.max)
            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
